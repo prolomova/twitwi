@@ -1,8 +1,7 @@
 import org.json4s
 import org.json4s.JObject
 
-object Application extends App {
-
+class Application {
   def getHTTP() : String = ???
 
   def do_twitwi(intervalManager : IntervalManager, parser : TweetParser) : Unit = {
@@ -23,4 +22,33 @@ object Application extends App {
   }
 
   def exportStat() : JObject = ???
+}
+
+
+object Application extends App {
+  override def main(args: Array[String]): Unit = {
+    val thread = new Thread(new Runnable() {
+      override def run(): Unit = {
+
+        while (true) {
+          println("hello from thread 1")
+          Thread.sleep(200)
+        }
+      }
+    })
+
+
+    val thread2 = new Thread(new Runnable() {
+      override def run(): Unit = {
+
+        while (true) {
+          println("hello from thread 2")
+          Thread.sleep(100)
+        }
+      }
+    })
+
+    thread2.start()
+    thread.start()
+  }
 }
